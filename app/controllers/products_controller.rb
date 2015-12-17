@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
   end
 
   def new
@@ -13,6 +14,11 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    if current_admin
+      @product = current_admin.products.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def create

@@ -16,4 +16,10 @@ class SessionsController < ApplicationController
       render action: 'new'
     end
   end
+
+  def destroy
+    session[:admin_id] = nil
+    redirect_to '/login'
+  end
+
 end

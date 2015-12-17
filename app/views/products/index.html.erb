@@ -1,21 +1,9 @@
-<table>
-  <tr>
-    <th>name</th>
-    <th>quantity</th>
-    <th>price</th>
-    <th>brand</th>
-    <th>material</th>
-    <th>description</th>
-  </tr>
+<h3 class="text-center">Products for Sale</h3>
 
-  <% @products.each do |product| %>
-    <tr>
-      <td><%= product.name %></td>
-      <td><%= product.quantity %></td>
-      <td><%= product.price %></td>
-      <td><%= product.brand %></td>
-      <td><%= product.material %></td>
-      <td><%= product.description %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <% @products.each do |product| %>
+      <%= render "product_row", product: product, order_item: @order_item %>
+    <% end %>
+  </div>
+</div>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resource :admins
   resource :sessions
   resources :products
+  resource :users
 
 
 

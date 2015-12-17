@@ -8,9 +8,12 @@
 
 
 Product.delete_all
-Product.create! id: 1, name: "shirt", price: 100, quantity: 10, brand: "chrome", material: "cotton",
-description: "loren ipsum"
-Product.create! id: 2, name: "pant", price: 100, quantity: 10, brand: "levis", material: "cotton",
-description: "loren ipsum"
-Product.create! id: 3, name: "shoes", price: 100, quantity: 10, brand: "nike", material: "cotton",
-description: "loren ipsum"
+Product.create! id: 1, name: "Banana", price: 100, active: true
+Product.create! id: 2, name: "Apple", price: 250, active: true
+Product.create! id: 3, name: "Carton of Strawberries", price: 199, active: true
+
+OrderStatus.delete_all
+OrderStatus.create! id: 1, name: "In Progress"
+OrderStatus.create! id: 2, name: "Placed"
+OrderStatus.create! id: 3, name: "Shipped"
+OrderStatus.create! id: 4, name: "Cancelled"

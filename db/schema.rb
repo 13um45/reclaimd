@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217210327) do
+ActiveRecord::Schema.define(version: 20151217225719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,37 @@ ActiveRecord::Schema.define(version: 20151217210327) do
   end
 
   add_index "admins", ["username"], name: "index_admins_on_username", unique: true, using: :btree
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "order_id"
+    t.integer  "unit_price"
+    t.integer  "quantity"
+    t.integer  "total_price"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
+
+  create_table "order_statuses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "subtotal"
+    t.integer  "tax"
+    t.integer  "shipping"
+    t.integer  "total"
+    t.integer  "order_status_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "orders", ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.boolean  "tops"
@@ -56,6 +87,7 @@ ActiveRecord::Schema.define(version: 20151217210327) do
     t.datetime "updated_at",  null: false
     t.string   "name"
     t.integer  "admin_id"
+    t.boolean  "active"
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,4 +99,7 @@ ActiveRecord::Schema.define(version: 20151217210327) do
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "order_statuses"
 end
